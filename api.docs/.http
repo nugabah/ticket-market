@@ -1,0 +1,32 @@
+#회원가입
+###
+POST /users/signup
+Content-Type: application/json
+
+#로그인
+###
+POST /auth/signin
+Content-Type: application/json
+
+#로그아웃
+###
+POST /auth/signout
+
+# 공연 조회
+###
+GET /show
+
+# 공연 검색
+###
+GET /show?title=검색단어
+
+
+# 공연 등록
+###
+POST /show
+Content-Type: application/json
+
+# 공연 예매
+###
+POST /reserve
+Content-Type: application/json
