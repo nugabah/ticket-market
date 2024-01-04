@@ -28,13 +28,19 @@ export class History {
 
   @DeleteDateColumn()
   deleted_at?: Date;
+
+  @IsNumber()
+  @Column()
+  user_id: number;
+
+  @IsNumber()
+  @Column()
+  reserve_id: number;
   
   @ManyToOne(() => User, (user) => user.history)
-  @JoinColumn({ name: 'user_id', referencedColumnName: 'id' })
   user: User;
 
   @ManyToOne(() => Reserve, (reserve) => reserve.history)
-  @JoinColumn({ name: 'reserve_id', referencedColumnName: 'id' })
   reserve: Reserve;
 
 }

@@ -1,7 +1,12 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Req } from '@nestjs/common';
 import { HistoryService } from './history.service';
 import { CreateHistoryDto } from './dto/create-history.dto';
 import { UpdateHistoryDto } from './dto/update-history.dto';
+import { Request } from 'express';
+
+interface CustomRequest extends Request {
+  userId?: number;
+}
 
 @Controller('api/history')
 export class HistoryController {
@@ -13,8 +18,9 @@ export class HistoryController {
   }
 
   @Get()
-  findAll() {
-    return this.historyService.findAll();
+  findUserOnly(@Req() req: CustomRequest) {
+    const userId = req.userId;
+    return this.historyService.findAll(userId);
   }
 
   @Get(':id')

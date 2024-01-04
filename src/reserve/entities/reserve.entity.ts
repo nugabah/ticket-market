@@ -3,7 +3,7 @@ import { History } from 'src/history/entities/history.entity';
 import { Seat } from 'src/seats/entities/seat.entity';
 import { Show } from 'src/show/entities/show.entity';
 import { User } from 'src/users/entities/user.entity';
-import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
 
 @Entity({
   name: 'reserve',
@@ -32,15 +32,28 @@ export class Reserve {
   @Column('decimal')
   quantity: number;
 
+  @IsNumber()
+  @Column()
+  user_id: number;
+
+  @IsNumber()
+  @Column()
+  show_id: number;
+  
+  @CreateDateColumn()
+  created_at: Date;
+
+  @UpdateDateColumn()
+  updated_at: Date;
+
+
   @OneToMany(() => History, (history) => history.reserve)
   history: History[];
   
   @ManyToOne(() => User, (user) => user.reserve)
-  @JoinColumn({ name: 'user_id', referencedColumnName: 'id' })
   user: User;
 
   @ManyToOne(() => Show, show => show.reserve)
-  @JoinColumn({ name: 'show_id', referencedColumnName: 'id' })
   show: Show;
 
   @ManyToOne(() => Seat, (seat) => seat.reserve)

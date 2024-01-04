@@ -1,32 +1,97 @@
 #회원가입
+
 ###
-POST /users/signup
+
+POST api/users/signup
 Content-Type: application/json
+
+{
+  "email" : string,
+  "nickname" : string,
+  "password" : string,
+  "passwordCheck" : string
+}
+
 
 #로그인
+
 ###
-POST /auth/signin
+
+POST api/auth/signin
 Content-Type: application/json
+
+{
+  "email" : string,
+  "password" : string,
+}
 
 #로그아웃
-###
-POST /auth/signout
 
-# 공연 조회
 ###
-GET /show
+
+POST api/auth/signout
+
+# 공연 전체 조회
+
+###
+
+GET api/show
 
 # 공연 검색
-###
-GET /show?title=검색단어
 
+###
+
+GET api/show?title=검색단어
+
+# 공연 상세 조회
+
+###
+
+GET api/show/:showId
 
 # 공연 등록
+
 ###
-POST /show
+
+POST api/show
 Content-Type: application/json
 
+{
+"title": string,
+"image": string,
+"description": string,
+"category": string,
+"date_time": string[],
+"seat_number": number[],
+"reservation": Boolean[],
+"theater": string
+}
+
 # 공연 예매
+
 ###
-POST /reserve
+
+POST api/reserve/:showId
+Content-Type: application/json
+
+{
+"title" : "IM HERO TOUR 2024",
+"date_time": "2024-01-05 15:30",
+"theater" : "제1관",
+"quantity" : 1,
+"total_price" : 30000
+}
+
+# 예매 정보 조회 (로그인한 유저만 본인의 정보 조회가능)
+
+###
+
+get api/reserve
+Content-Type: application/json
+
+# 결제 정보 조회 (로그인한 유저만 본인의 정보 조회가능)
+
+###
+
+get api/history
 Content-Type: application/json

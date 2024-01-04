@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsString } from "class-validator";
+import { IsBoolean, IsNotEmpty, IsNumber, IsString } from "class-validator";
 
 export class CreateShowDto {
     @IsString()
@@ -20,6 +20,14 @@ export class CreateShowDto {
     @IsString()
     @IsNotEmpty({ message: '공연 날짜 및 시간을 입력해주세요.' })
     readonly date_time: string[];
+
+    @IsNumber()
+    @IsNotEmpty({ message: '공연 날짜 및 시간 당 좌석수를 입력해주세요.' })
+    readonly seat_number: number[];
+  
+    @IsBoolean()
+    @IsNotEmpty({ message: '공연 날짜 및 시간 당 예약가능 여부를 입력해주세요.' })
+    readonly reservation: Boolean[];
 
     @IsString()
     @IsNotEmpty({ message: '상영관을 입력해주세요.' })

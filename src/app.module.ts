@@ -20,6 +20,7 @@ import { AuthMiddleware } from './middleware/auth/auth.middleware';
 import { ShowController } from './show/show.controller';
 import { AdminMiddleware } from './middleware/admin/admin.middleware';
 import { ReserveController } from './reserve/reserve.controller';
+import { HistoryController } from './history/history.controller';
 
 const typeOrmModuleOptions = {
   useFactory: async (
@@ -63,5 +64,7 @@ export class AppModule implements NestModule{
     consumer.apply(AuthMiddleware).forRoutes(ShowController);
     consumer.apply(AdminMiddleware).forRoutes({ path: 'api/show', method: RequestMethod.POST });
     consumer.apply(AuthMiddleware).forRoutes(ReserveController);
+    consumer.apply(AuthMiddleware).forRoutes(HistoryController);
+    consumer.apply(AuthMiddleware).forRoutes({ path: 'api/users', method: RequestMethod.GET });
   }
 }

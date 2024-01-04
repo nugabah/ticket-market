@@ -6,6 +6,10 @@ export class CreateReserveDto {
     readonly title: string;
     
     @IsString()
+    @IsNotEmpty({ message: '상영관을 입력해주세요.' })
+    readonly theater: string;
+
+    @IsString()
     @IsNotEmpty({ message: '날짜 및 시간을 입력해주세요.' })
     readonly date_time: string;
     
